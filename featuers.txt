@@ -1,0 +1,31 @@
+Here are the features of your Web Application Firewall (WAF) in simple sentences:
+
+1. **Rate Limiting**: Blocks IPs that send too many requests within a set time.
+2. **Concurrent Request Control**: Limits simultaneous requests from a single IP.
+3. **Malicious Payload Detection**: Detects SQL injection, XSS, and command injection using regex patterns.
+4. **Machine Learning Integration**: Uses a machine learning model to identify malicious payloads.
+5. **VirusTotal IP Check**: Blocks IPs flagged as malicious by VirusTotal API.
+6. **Blacklist Management**: Maintains a list of blocked IPs and saves it to a file.
+7. **Trusted IP Whitelisting**: Allows trusted IPs to bypass security checks.
+8. **Firewall Integration**: Blocks IPs at the system firewall level (iptables, Windows Firewall, macOS pf).
+9. **Slow Request Detection**: Identifies and blocks IPs sending slow requests to prevent DoS attacks.
+10. **Request Timeout**: Terminates requests that take too long to process.
+11. **Header Size Limits**: Blocks requests with oversized or too many headers.
+12. **Payload Size Limits**: Rejects requests with payloads larger than a set size.
+13. **User Authentication**: Supports user login with admin and user roles using Flask-Login.
+14. **Database Storage**: Stores user data in an SQLite database.
+15. **Logging**: Logs security events, blocked IPs, and attacks to CSV and log files.
+16. **Telegram Alerts**: Sends alerts for attacks and blocked IPs via Telegram.
+17. **MAC Address Generation**: Creates pseudo-MAC addresses for IPs based on user-agent.
+18. **Dashboard Interface**: Provides a web interface for admins to view logs and manage settings.
+19. **User Management**: Allows admins to add, edit, or delete users.
+20. **IP Reputation Caching**: Caches VirusTotal results to reduce API calls.
+21. **Log Export**: Exports attack and attacker logs as CSV files.
+22. **Log Deletion**: Allows admins to delete security, attack, or attacker logs.
+23. **Settings Configuration**: Lets admins update WAF settings like rate limits and file paths.
+24. **Thread Safety**: Uses thread locks for safe data access in multi-threaded environments.
+25. **Role-Based Access**: Restricts sensitive actions to admin users.
+26. **Trusted IP Management**: Admins can add or remove IPs from the trusted list.
+27. **Statistics Endpoint**: Provides stats on active IPs, blocked IPs, and concurrent requests.
+28. **Slow Counter Reset**: Allows admins to reset slow request counters for IPs.
+29. **VirusTotal Cache Clearing**: Admins can clear cached VirusTotal results.

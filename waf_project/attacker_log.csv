@@ -1,0 +1,8 @@
+IP Address,MAC Address,Request Count,Timestamp,Reason
+192.168.1.62,90:96:21:bd:91:21,1,2025-06-15 17:03:35,malicious_payload:xss
+192.168.1.62,90:96:21:bd:91:21,51,2025-06-15 17:05:52,rate_limit_exceeded
+192.168.1.62,90:96:21:bd:91:21,1,2025-06-15 17:07:14,malicious_payload:sql
+192.168.1.12,10:f7:8f:dc:26:b3,1,2025-06-15 17:27:07,malicious_payload:shell
+192.168.1.62,90:96:21:bd:91:21,1,2025-06-16 09:09:01,malicious_payload:xss
+192.168.1.20,d9:33:75:07:49:3c,51,2025-06-16 12:15:22,rate_limit_exceeded
+192.168.1.20,d9:33:75:07:49:3c,1,2025-06-16 12:18:32,malicious_payload:xss

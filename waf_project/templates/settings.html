@@ -1,0 +1,238 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-primary">WAF Settings</h1>
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Configuration Settings</h5>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-sm btn-success">Back to Dashboard</a>
+        </div>
+        <div class="card-body">
+            {% if current_user.role == 'admin' %}
+            <form id="settings-form">
+                <!-- File Paths Section -->
+                <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-folder-fill me-2"></i>File Paths</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="BLACKLIST_FILE" class="form-label">Blacklist File</label>
+                        <input type="text" class="form-control" id="BLACKLIST_FILE" name="BLACKLIST_FILE" value="{{ config.BLACKLIST_FILE }}" placeholder="e.g., blacklist.txt">
+                        <small class="form-text text-muted">Path to the blacklist file.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="TRUSTED_IPS_FILE" class="form-label">Trusted IPs File</label>
+                        <input type="text" class="form-control" id="TRUSTED_IPS_FILE" name="TRUSTED_IPS_FILE" value="{{ config.TRUSTED_IPS_FILE }}" placeholder="e.g., trusted_ips.txt">
+                        <small class="form-text text-muted">Path to the trusted IPs file.</small>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="LOG_FILE" class="form-label">Attacker Log File</label>
+                        <input type="text" class="form-control" id="LOG_FILE" name="LOG_FILE" value="{{ config.LOG_FILE }}" placeholder="e.g., attacker_log.csv">
+                        <small class="form-text text-muted">Path to the attacker log file.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ATTACK_LOG_FILE" class="form-label">Attack Log File</label>
+                        <input type="text" class="form-control" id="ATTACK_LOG_FILE" name="ATTACK_LOG_FILE" value="{{ config.ATTACK_LOG_FILE }}" placeholder="e.g., attack_log.csv">
+                        <small class="form-text text-muted">Path to the attack log file.</small>
+                    </div>
+                </div>
+                <!-- Telegram Integration Section -->
+                <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-telegram me-2"></i>Telegram Integration</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="TELEGRAM_BOT_TOKEN" class="form-label">Telegram Bot Token</label>
+                        <input type="text" class="form-control" id="TELEGRAM_BOT_TOKEN" name="TELEGRAM_BOT_TOKEN" value="{{ config.TELEGRAM_BOT_TOKEN }}" placeholder="e.g., 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ewq">
+                        <small class="form-text text-muted">Telegram Bot Token for sending alerts.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="TELEGRAM_CHAT_ID" class="form-label">Telegram Chat ID</label>
+                        <input type="text" class="form-control" id="TELEGRAM_CHAT_ID" name="TELEGRAM_CHAT_ID" value="{{ config.TELEGRAM_CHAT_ID }}" placeholder="e.g., -1001234567890">
+                        <small class="form-text text-muted">Chat ID where alerts will be sent.</small>
+                    </div>
+                </div>
+                <!-- Rate Limiting Section -->
+                <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-speedometer2 me-2"></i>Rate Limiting</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="RATE_LIMIT" class="form-label">Rate Limit (requests)</label>
+                        <input type="number" class="form-control" id="RATE_LIMIT" name="RATE_LIMIT" value="{{ config.RATE_LIMIT }}" min="1" required>
+                        <small class="form-text text-muted">Maximum number of requests allowed per IP in the window.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="WINDOW_SIZE" class="form-label">Window Size (seconds)</label>
+                        <input type="number" class="form-control" id="WINDOW_SIZE" name="WINDOW_SIZE" value="{{ config.WINDOW_SIZE }}" min="1" required>
+                        <small class="form-text text-muted">Time window for rate limiting in seconds.</small>
+                    </div>
+                </div>
+                <!-- Request Limits Section -->
+                <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-shield-lock-fill me-2"></i>Request Limits</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="MAX_CONTENT_LENGTH" class="form-label">Max Content Length (bytes)</label>
+                        <input type="number" class="form-control" id="MAX_CONTENT_LENGTH" name="MAX_CONTENT_LENGTH" value="{{ config.MAX_CONTENT_LENGTH }}" min="1024" required>
+                        <small class="form-text text-muted">Maximum size of request body in bytes.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="MAX_REQUEST_HEADERS" class="form-label">Max Request Headers</label>
+                        <input type="number" class="form-control" id="MAX_REQUEST_HEADERS" name="MAX_REQUEST_HEADERS" value="{{ config.MAX_REQUEST_HEADERS }}" min="1" required>
+                        <small class="form-text text-muted">Maximum number of headers allowed in a request.</small>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="MAX_HEADER_SIZE" class="form-label">Max Header Size (bytes)</label>
+                        <input type="number" class="form-control" id="MAX_HEADER_SIZE" name="MAX_HEADER_SIZE" value="{{ config.MAX_HEADER_SIZE }}" min="1024" required>
+                        <small class="form-text text-muted">Maximum size of a single header in bytes.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="MAX_CONCURRENT_REQUESTS_PER_IP" class="form-label">Max Concurrent Requests per IP</label>
+                        <input type="number" class="form-control" id="MAX_CONCURRENT_REQUESTS_PER_IP" name="MAX_CONCURRENT_REQUESTS_PER_IP" value="{{ config.MAX_CONCURRENT_REQUESTS_PER_IP }}" min="1" required>
+                        <small class="form-text text-muted">Maximum concurrent requests allowed per IP.</small>
+                    </div>
+                </div>
+                <!-- Timeout Section -->
+                <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-hourglass-split me-2"></i>Timeouts</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="MAX_REQUEST_PROCESSING_TIME" class="form-label">Max Processing Time (seconds)</label>
+                        <input type="number" class="form-control" id="MAX_REQUEST_PROCESSING_TIME" name="MAX_REQUEST_PROCESSING_TIME" value="{{ config.MAX_REQUEST_PROCESSING_TIME }}" min="1" required>
+                        <small class="form-text text-muted">Maximum time to process a request before flagging as slow.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="REQUEST_TIMEOUT" class="form-label">Request Timeout (seconds)</label>
+                        <input type="number" class="form-control" id="REQUEST_TIMEOUT" name="REQUEST_TIMEOUT" value="{{ config.REQUEST_TIMEOUT }}" min="1" required>
+                        <small class="form-text text-muted">Maximum time a request can take before being terminated.</small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Save Settings</button>
+                <span id="settings-loading" class="d-none spinner-border spinner-border-sm text-primary ms-2" role="status"></span>
+            </form>
+            <div id="settings-message" class="mt-3"></div>
+            {% else %}
+            <div class="alert alert-warning" role="alert">
+                Only administrators can modify settings.
+            </div>
+            <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-folder-fill me-2"></i>File Paths</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>Blacklist File:</strong> {{ config.BLACKLIST_FILE }}</li>
+                <li class="list-group-item"><strong>Trusted IPs File:</strong> {{ config.TRUSTED_IPS_FILE }}</li>
+                <li class="list-group-item"><strong>Attacker Log File:</strong> {{ config.LOG_FILE }}</li>
+                <li class="list-group-item"><strong>Attack Log File:</strong> {{ config.ATTACK_LOG_FILE }}</li>
+            </ul>
+            <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-telegram me-2"></i>Telegram Integration</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>Telegram Bot Token:</strong> {{ config.TELEGRAM_BOT_TOKEN }}</li>
+                <li class="list-group-item"><strong>Telegram Chat ID:</strong> {{ config.TELEGRAM_CHAT_ID }}</li>
+            </ul>
+            <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-speedometer2 me-2"></i>Rate Limiting</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>Rate Limit:</strong> {{ config.RATE_LIMIT }} requests</li>
+                <li class="list-group-item"><strong>Window Size:</strong> {{ config.WINDOW_SIZE }} seconds</li>
+            </ul>
+            <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-shield-lock-fill me-2"></i>Request Limits</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>Max Content Length:</strong> {{ config.MAX_CONTENT_LENGTH }} bytes</li>
+                <li class="list-group-item"><strong>Max Request Headers:</strong> {{ config.MAX_REQUEST_HEADERS }}</li>
+                <li class="list-group-item"><strong>Max Header Size:</strong> {{ config.MAX_HEADER_SIZE }} bytes</li>
+                <li class="list-group-item"><strong>Max Concurrent Requests per IP:</strong> {{ config.MAX_CONCURRENT_REQUESTS_PER_IP }}</li>
+            </ul>
+            <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2"><i class="bi bi-hourglass-split me-2"></i>Timeouts</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>Max Processing Time:</strong> {{ config.MAX_REQUEST_PROCESSING_TIME }} seconds</li>
+                <li class="list-group-item"><strong>Request Timeout:</strong> {{ config.REQUEST_TIMEOUT }} seconds</li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+{% if current_user.role == 'admin' %}
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('settings-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const loading = document.getElementById('settings-loading');
+            if (loading) loading.classList.remove('d-none');
+            
+            const formData = new FormData(form);
+            const data = {};
+            let isValid = true;
+            formData.forEach((value, key) => {
+                if (key.includes('RATE_LIMIT') || key.includes('WINDOW_SIZE') || key.includes('MAX_') || key.includes('REQUEST_TIMEOUT')) {
+                    if (parseInt(value) <= 0) {
+                        showMessage('settings-message', `${key} must be a positive number`, 'danger');
+                        isValid = false;
+                    }
+                }
+                data[key] = value;
+            });
+
+            if (!isValid) {
+                if (loading) loading.classList.add('d-none');
+                return;
+            }
+
+            fetch('/update-settings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (loading) loading.classList.add('d-none');
+                showMessage('settings-message', data.message, data.status === 'success' ? 'success' : 'danger');
+            })
+            .catch(error => {
+                if (loading) loading.classList.add('d-none');
+                console.error('Error updating settings:', error);
+                showMessage('settings-message', 'Failed to update settings', 'danger');
+            });
+        });
+    }
+});
+{% endif %}
+</script>
+{% endblock %}

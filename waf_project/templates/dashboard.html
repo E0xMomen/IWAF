@@ -1,0 +1,191 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-primary">IWAF Dashboard</h1>
+    <div id="stats" class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Blacklist Size</div>
+                <div class="card-body">
+                    <h5 id="blacklist-size" class="card-title">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Trusted IPs Count</div>
+                <div class="card-body">
+                    <h5 id="trusted-ips-count" class="card-title">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Active IPs</div>
+                <div class="card-body">
+                    <h5 id="active-ips" class="card-title">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">High Rate IPs</div>
+                <div class="card-body">
+                    <ul id="high-rate-ips" class="list-group">
+                        <li class="list-group-item d-flex justify-content-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Slow Request Offenders</div>
+                <div class="card-body">
+                    <ul id="slow-request-offenders" class="list-group">
+                        <li class="list-group-item d-flex justify-content-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            Attack Type Distribution
+            {% if current_user.role == 'admin' %}
+            <button id="delete-attack-log" class="btn btn-sm btn-danger">Delete Attack Log</button>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <canvas id="attack-chart"></canvas>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            Attacker Log
+            <div>
+                <a href="{{ url_for('export_attacker_log') }}" class="btn btn-sm btn-success me-2">Export</a>
+                {% if current_user.role == 'admin' %}
+                <button id="delete-attacker-log" class="btn btn-sm btn-danger">Delete Attacker Log</button>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>MAC Address</th>
+                        <th>Request Count</th>
+                        <th>Timestamp</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody id="attacker-log-table">
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            Attack Log
+            <div>
+                <a href="{{ url_for('export_attack_log') }}" class="btn btn-sm btn-success me-2">Export</a>
+                {% if current_user.role == 'admin' %}
+                <button id="delete-attack-log" class="btn btn-sm btn-danger">Delete Attack Log</button>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <pre id="attack-log-content" class="border p-3">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </pre>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            Security Log
+            {% if current_user.role == 'admin' %}
+            <button id="delete-security-log" class="btn btn-sm btn-danger">Delete Security Log</button>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <pre id="security-log-content" class="border p-3">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </pre>
+        </div>
+    </div>
+</div>
+{% endblock %}

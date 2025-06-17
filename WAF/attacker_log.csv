@@ -1,0 +1,4 @@
+IP Address,MAC Address,Request Count,Timestamp,Reason
+59.97.182.98,69:8a:b1:94:ca:a9,0,2025-05-09 22:43:10,malicious_ip:MALICIOUS
+192.168.1.62,90:96:21:bd:91:21,1,2025-05-09 22:55:59,malicious_payload:xss
+192.168.1.62,90:96:21:bd:91:21,17,2025-05-11 22:04:28,malicious_payload:xss

@@ -1,0 +1,3 @@
+how to get telegram bot chat ID
+
+https://api.telegram.org/bot (api key) /getupdates

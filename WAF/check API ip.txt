@@ -1,0 +1,70 @@
+#------------------------------------------------------------------------------------------------------#
+# def is_ip_malicious(ip_address, api_key=VT_API_KEY):
+#     """
+#     Check if an IP address is malicious using VirusTotal API (or mock for testing).
+#     """
+#     now = time()
+#     with data_lock:
+#         if ip_address in vt_cache:
+#             timestamp, is_malicious, details = vt_cache[ip_address]
+#             if now - timestamp < VT_CACHE_DURATION:
+#                 logger.debug(f"Using cached VirusTotal result for {ip_address}: {details['status']}")
+#                 return is_malicious, details
+
+#     # Mock malicious response for testing
+#     if ip_address == "192.168.1.62":  # Test IP
+#         details = {
+#             "status": "MALICIOUS",
+#             "reason": "Detected as malicious by 3 security vendors (mocked for testing)",
+#             "malicious_count": 3,
+#             "suspicious_count": 0,
+#             "country": "Unknown"
+#         }
+#         is_malicious = True
+#         vt_cache[ip_address] = (now, is_malicious, details)
+#         logger.info(f"Mocked malicious response for test IP {ip_address}")
+#         return is_malicious, details
+
+#     # Original VirusTotal API logic (unchanged)
+#     if not is_valid_ip(ip_address):
+#         return False, {"status": "ERROR", "reason": "Invalid IP address format"}
+#     vt_base_url = "https://www.virustotal.com/api/v3/ip_addresses/"
+#     headers = {
+#         "accept": "application/json",
+#         "x-apikey": api_key
+#     }
+#     try:
+#         response = requests.get(f"{vt_base_url}{ip_address}", headers=headers)
+#         response.raise_for_status()
+#         data = response.json()
+#     except Exception as e:
+#         logger.warning(f"VirusTotal API error for {ip_address}: {str(e)}")
+#         return False, {"status": "ERROR", "reason": f"API error: {str(e)}"}
+#     try:
+#         attributes = data.get("data", {}).get("attributes", {})
+#         malicious_count = attributes.get("last_analysis_stats", {}).get("malicious", 0)
+#         suspicious_count = attributes.get("last_analysis_stats", {}).get("suspicious", 0)
+#         details = {
+#             "malicious_count": malicious_count,
+#             "suspicious_count": suspicious_count,
+#             "country": attributes.get("country", "Unknown"),
+#         }
+#         if malicious_count >= 2:
+#             details["status"] = "MALICIOUS"
+#             details["reason"] = f"Detected as malicious by {malicious_count} security vendors"
+#             is_malicious = True
+#         elif malicious_count == 1 or suspicious_count >= 2:
+#             details["status"] = "SUSPICIOUS"
+#             details["reason"] = f"Flagged suspicious by {suspicious_count} vendors, malicious by {malicious_count}"
+#             is_malicious = False
+#         else:
+#             details["status"] = "SAFE"
+#             details["reason"] = "No significant threats detected"
+#             is_malicious = False
+#         with data_lock:
+#             vt_cache[ip_address] = (now, is_malicious, details)
+#         return is_malicious, details
+#     except Exception as e:
+#         logger.error(f"Error processing VirusTotal results for {ip_address}: {str(e)}")
+#         return False, {"status": "ERROR", "reason": f"Error processing results: {str(e)}"}
+#--------------------------------------------------------------------------------------------------------#

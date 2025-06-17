@@ -1,0 +1,6 @@
+timestamp,event_name,violation_type,signature_name,source_ip,destination_ip,source_port,destination_port,device_action,requested_url,response_code,referer,user_agent
+2025-06-15 17:03:34,Security Violation,xss,<script>alert('XSS')</script>,192.168.1.62,192.168.1.7,43966,80,Blocked,http://192.168.1.7/?search=<script>alert('XSS')</script>,403,Unknown,Unknown
+2025-06-15 17:07:14,Security Violation,sql,admin' OR '1'='1,192.168.1.62,192.168.1.7,41058,80,Blocked,http://192.168.1.7/login,403,Unknown,Unknown
+2025-06-15 17:27:06,Security Violation,shell,;cat /etc/passwd,192.168.1.12,192.168.1.7,64078,80,Blocked,http://192.168.1.7/login,403,Unknown,Unknown
+2025-06-16 09:08:59,Security Violation,xss,<script>alert('XSS')</script>,192.168.1.62,192.168.1.7,59352,80,Blocked,http://192.168.1.7/?search=<script>alert('XSS')</script>,403,Unknown,Unknown
+2025-06-16 12:18:32,Security Violation,xss,<script>alert('XSS')</script>,192.168.1.20,192.168.1.12,51954,80,Blocked,http://192.168.1.12/?search=<script>alert('XSS')</script>,403,Unknown,Unknown

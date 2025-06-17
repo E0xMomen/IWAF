@@ -1,0 +1,9 @@
+1 -> check ip with API virus total
+
+2 -> check if dos attack 
+
+3 -> check the request through model
+
+4 -> if good pass , if bad block
+
+5 -> if bad send alert through telegram bot
