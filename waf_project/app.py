@@ -102,8 +102,8 @@ class Config:
     MAX_REQUEST_PROCESSING_TIME = 30
     REQUEST_TIMEOUT = 10
     MAX_CONCURRENT_REQUESTS_PER_IP = 10
-    TELEGRAM_BOT_TOKEN = "7767260738:AAE2FYABGh91dRQEAMm9NQBHkr0QSEmQZ-I"  # Telegram Bot Token
-    TELEGRAM_CHAT_ID = "1333522923"    # Telegram Chat ID for alerts
+    TELEGRAM_BOT_TOKEN = ""  # Telegram Bot Token
+    TELEGRAM_CHAT_ID = ""    # Telegram Chat ID for alerts
 
 config = Config()
 
