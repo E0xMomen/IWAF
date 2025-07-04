@@ -35151,3 +35151,229 @@ ValueError: read of closed file
 2025-06-16 13:06:48,906 - INFO - 127.0.0.1 - - [16/Jun/2025 13:06:48] "GET /attacker-log HTTP/1.1" 200 -
 2025-06-16 13:06:48,906 - INFO - 127.0.0.1 - - [16/Jun/2025 13:06:48] "GET /attack-log HTTP/1.1" 200 -
 2025-06-16 13:06:48,949 - INFO - 127.0.0.1 - - [16/Jun/2025 13:06:48] "GET /security-log HTTP/1.1" 200 -
+2025-06-21 16:44:01,376 - ERROR - Error loading ML model: No module named 'sklearn'
+2025-06-21 16:44:01,380 - INFO - Loaded 3 trusted IPs
+2025-06-21 16:44:01,590 - ERROR - Failed to block IP 59.97.182.98 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 59.97.182.98', 'dir=in', 'action=block', 'remoteip=59.97.182.98']' returned non-zero exit status 1.
+2025-06-21 16:44:01,663 - ERROR - Failed to block IP 185.156.72.2 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 185.156.72.2', 'dir=in', 'action=block', 'remoteip=185.156.72.2']' returned non-zero exit status 1.
+2025-06-21 16:44:01,723 - ERROR - Failed to block IP 192.168.1.12 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 192.168.1.12', 'dir=in', 'action=block', 'remoteip=192.168.1.12']' returned non-zero exit status 1.
+2025-06-21 16:44:01,784 - ERROR - Failed to block IP 160.191.244.17 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 160.191.244.17', 'dir=in', 'action=block', 'remoteip=160.191.244.17']' returned non-zero exit status 1.
+2025-06-21 16:44:01,846 - ERROR - Failed to block IP 45.138.74.1 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 45.138.74.1', 'dir=in', 'action=block', 'remoteip=45.138.74.1']' returned non-zero exit status 1.
+2025-06-21 16:44:01,916 - ERROR - Failed to block IP 192.168.1.62 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 192.168.1.62', 'dir=in', 'action=block', 'remoteip=192.168.1.62']' returned non-zero exit status 1.
+2025-06-21 16:44:01,916 - INFO - Loaded and blocked 6 blacklisted IPs at firewall level
+2025-06-21 16:44:01,923 - INFO - Starting security server with WAF capabilities...
+2025-06-21 16:44:01,962 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://192.168.1.3:80
+2025-06-21 16:44:01,963 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-21 16:44:17,310 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:17] "[32mGET / HTTP/1.1[0m" 302 -
+2025-06-21 16:44:17,402 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:17] "GET /login HTTP/1.1" 200 -
+2025-06-21 16:44:17,535 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:17] "GET /static/logo.png HTTP/1.1" 200 -
+2025-06-21 16:44:17,546 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:17] "GET /static/main.js HTTP/1.1" 200 -
+2025-06-21 16:44:17,563 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:17] "GET /static/style.css HTTP/1.1" 200 -
+2025-06-21 16:44:17,877 - INFO - Request from 127.0.0.1: status=404, time=0.00s, size=0 bytes
+2025-06-21 16:44:17,878 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:17] "[33mGET /static/favicon.ico HTTP/1.1[0m" 404 -
+2025-06-21 16:44:22,238 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-06-21 16:44:22,271 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "GET /dashboard HTTP/1.1" 200 -
+2025-06-21 16:44:22,315 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:22,320 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:22,374 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "GET /stats HTTP/1.1" 200 -
+2025-06-21 16:44:22,396 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "GET /attack-log HTTP/1.1" 200 -
+2025-06-21 16:44:22,418 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-21 16:44:22,506 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "GET /security-log HTTP/1.1" 200 -
+2025-06-21 16:44:22,587 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:22] "GET /attack-log HTTP/1.1" 200 -
+2025-06-21 16:44:26,427 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:26] "GET /blacklist-page HTTP/1.1" 200 -
+2025-06-21 16:44:26,459 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:26] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:26,466 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:26] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:26,492 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:26] "GET /blacklist HTTP/1.1" 200 -
+2025-06-21 16:44:26,993 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:26] "GET /static/main.js HTTP/1.1" 200 -
+2025-06-21 16:44:28,595 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:28] "GET /trusted-page HTTP/1.1" 200 -
+2025-06-21 16:44:28,630 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:28] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:28,634 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:28] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:28,670 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:28] "GET /trusted HTTP/1.1" 200 -
+2025-06-21 16:44:29,171 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:29] "GET /check-ip-page HTTP/1.1" 200 -
+2025-06-21 16:44:29,195 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:29] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:29,198 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:29] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:29,634 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:29] "GET /settings HTTP/1.1" 200 -
+2025-06-21 16:44:29,665 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:29] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:29,667 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:29] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:30,023 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:30] "GET /manage-users HTTP/1.1" 200 -
+2025-06-21 16:44:30,049 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:30] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:30,052 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:30] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:30,789 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:30] "GET /settings HTTP/1.1" 200 -
+2025-06-21 16:44:30,819 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:30] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:30,821 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:30] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:31,224 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "GET /manage-users HTTP/1.1" 200 -
+2025-06-21 16:44:31,251 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:31,257 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:31,707 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "GET /dashboard HTTP/1.1" 200 -
+2025-06-21 16:44:31,735 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-21 16:44:31,737 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:31,764 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "GET /stats HTTP/1.1" 200 -
+2025-06-21 16:44:31,774 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "GET /attack-log HTTP/1.1" 200 -
+2025-06-21 16:44:31,779 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-21 16:44:31,800 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "GET /attack-log HTTP/1.1" 200 -
+2025-06-21 16:44:31,837 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:31] "GET /security-log HTTP/1.1" 200 -
+2025-06-21 16:44:32,950 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:32] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:34,291 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:34] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:35,760 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:35] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:35,765 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:35] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:35,772 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:35] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:35,850 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:35] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:35,859 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:35] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-21 16:44:35,992 - INFO - 127.0.0.1 - - [21/Jun/2025 16:44:35] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 03:57:25,511 - ERROR - Error loading ML model: No module named 'sklearn'
+2025-06-23 03:57:25,515 - INFO - Loaded 3 trusted IPs
+2025-06-23 03:57:25,794 - ERROR - Failed to block IP 160.191.244.17 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 160.191.244.17', 'dir=in', 'action=block', 'remoteip=160.191.244.17']' returned non-zero exit status 1.
+2025-06-23 03:57:25,928 - ERROR - Failed to block IP 192.168.1.62 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 192.168.1.62', 'dir=in', 'action=block', 'remoteip=192.168.1.62']' returned non-zero exit status 1.
+2025-06-23 03:57:26,077 - ERROR - Failed to block IP 185.156.72.2 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 185.156.72.2', 'dir=in', 'action=block', 'remoteip=185.156.72.2']' returned non-zero exit status 1.
+2025-06-23 03:57:26,215 - ERROR - Failed to block IP 192.168.1.12 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 192.168.1.12', 'dir=in', 'action=block', 'remoteip=192.168.1.12']' returned non-zero exit status 1.
+2025-06-23 03:57:26,338 - ERROR - Failed to block IP 59.97.182.98 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 59.97.182.98', 'dir=in', 'action=block', 'remoteip=59.97.182.98']' returned non-zero exit status 1.
+2025-06-23 03:57:26,481 - ERROR - Failed to block IP 45.138.74.1 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 45.138.74.1', 'dir=in', 'action=block', 'remoteip=45.138.74.1']' returned non-zero exit status 1.
+2025-06-23 03:57:26,482 - INFO - Loaded and blocked 6 blacklisted IPs at firewall level
+2025-06-23 03:57:26,490 - INFO - Starting security server with WAF capabilities...
+2025-06-23 03:57:26,624 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://192.168.1.3:80
+2025-06-23 03:57:26,625 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-23 03:57:28,148 - INFO - 127.0.0.1 - - [23/Jun/2025 03:57:28] "[32mGET / HTTP/1.1[0m" 302 -
+2025-06-23 03:57:28,364 - INFO - 127.0.0.1 - - [23/Jun/2025 03:57:28] "GET /login HTTP/1.1" 200 -
+2025-06-23 03:57:28,458 - INFO - 127.0.0.1 - - [23/Jun/2025 03:57:28] "GET /static/logo.png HTTP/1.1" 200 -
+2025-06-23 03:57:28,464 - INFO - 127.0.0.1 - - [23/Jun/2025 03:57:28] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 03:57:28,467 - INFO - 127.0.0.1 - - [23/Jun/2025 03:57:28] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 03:57:28,531 - INFO - Request from 127.0.0.1: status=404, time=0.00s, size=0 bytes
+2025-06-23 03:57:28,531 - INFO - 127.0.0.1 - - [23/Jun/2025 03:57:28] "[33mGET /static/favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 03:57:39,310 - INFO - 127.0.0.1 - - [23/Jun/2025 03:57:39] "GET /login HTTP/1.1" 200 -
+2025-06-23 03:59:39,241 - INFO - 127.0.0.1 - - [23/Jun/2025 03:59:39] "POST /login?username=admin&password=admin123 HTTP/1.1" 200 -
+2025-06-23 04:00:00,844 - INFO - 127.0.0.1 - - [23/Jun/2025 04:00:00] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:00:00,886 - INFO - 127.0.0.1 - - [23/Jun/2025 04:00:00] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:00:00,892 - INFO - 127.0.0.1 - - [23/Jun/2025 04:00:00] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:00:00,893 - INFO - 127.0.0.1 - - [23/Jun/2025 04:00:00] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:00:22,292 - INFO - 127.0.0.1 - - [23/Jun/2025 04:00:22] "POST /login?username=admin&&password=admin123 HTTP/1.1" 200 -
+2025-06-23 04:00:35,007 - INFO - 127.0.0.1 - - [23/Jun/2025 04:00:35] "POST /login HTTP/1.1" 200 -
+2025-06-23 04:01:29,324 - INFO - 127.0.0.1 - - [23/Jun/2025 04:01:29] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:01:33,326 - INFO - 127.0.0.1 - - [23/Jun/2025 04:01:33] "POST /login HTTP/1.1" 200 -
+2025-06-23 04:01:50,975 - INFO - 127.0.0.1 - - [23/Jun/2025 04:01:50] "POST /login HTTP/1.1" 200 -
+2025-06-23 04:01:51,018 - INFO - 127.0.0.1 - - [23/Jun/2025 04:01:51] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:01:51,021 - INFO - 127.0.0.1 - - [23/Jun/2025 04:01:51] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:01:51,022 - INFO - 127.0.0.1 - - [23/Jun/2025 04:01:51] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:02:19,182 - ERROR - Error loading ML model: No module named 'sklearn'
+2025-06-23 04:02:19,182 - INFO - Loaded 3 trusted IPs
+2025-06-23 04:02:19,308 - ERROR - Failed to block IP 192.168.1.12 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 192.168.1.12', 'dir=in', 'action=block', 'remoteip=192.168.1.12']' returned non-zero exit status 1.
+2025-06-23 04:02:19,370 - ERROR - Failed to block IP 192.168.1.62 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 192.168.1.62', 'dir=in', 'action=block', 'remoteip=192.168.1.62']' returned non-zero exit status 1.
+2025-06-23 04:02:19,429 - ERROR - Failed to block IP 185.156.72.2 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 185.156.72.2', 'dir=in', 'action=block', 'remoteip=185.156.72.2']' returned non-zero exit status 1.
+2025-06-23 04:02:19,486 - ERROR - Failed to block IP 45.138.74.1 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 45.138.74.1', 'dir=in', 'action=block', 'remoteip=45.138.74.1']' returned non-zero exit status 1.
+2025-06-23 04:02:19,542 - ERROR - Failed to block IP 59.97.182.98 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 59.97.182.98', 'dir=in', 'action=block', 'remoteip=59.97.182.98']' returned non-zero exit status 1.
+2025-06-23 04:02:19,597 - ERROR - Failed to block IP 160.191.244.17 at firewall level: Command '['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=Block IP 160.191.244.17', 'dir=in', 'action=block', 'remoteip=160.191.244.17']' returned non-zero exit status 1.
+2025-06-23 04:02:19,597 - INFO - Loaded and blocked 6 blacklisted IPs at firewall level
+2025-06-23 04:02:19,604 - INFO - Starting security server with WAF capabilities...
+2025-06-23 04:02:19,616 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://192.168.1.3:80
+2025-06-23 04:02:19,616 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-23 04:02:25,325 - INFO - 127.0.0.1 - - [23/Jun/2025 04:02:25] "POST /login HTTP/1.1" 200 -
+2025-06-23 04:02:25,678 - INFO - 127.0.0.1 - - [23/Jun/2025 04:02:25] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:02:25,687 - INFO - 127.0.0.1 - - [23/Jun/2025 04:02:25] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:02:25,694 - INFO - 127.0.0.1 - - [23/Jun/2025 04:02:25] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:02:26,254 - INFO - 127.0.0.1 - - [23/Jun/2025 04:02:26] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:04:49,139 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:49] "POST /login HTTP/1.1" 200 -
+2025-06-23 04:04:49,160 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:49] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:04:49,165 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:49] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:04:49,167 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:49] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:04:49,920 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:49] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:04:51,232 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:51] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:04:51,269 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:51] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:04:51,327 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:51] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:04:51,341 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:51] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:04:51,437 - INFO - 127.0.0.1 - - [23/Jun/2025 04:04:51] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:08:32,715 - INFO - 127.0.0.1 - - [23/Jun/2025 04:08:32] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:08:32,752 - INFO - 127.0.0.1 - - [23/Jun/2025 04:08:32] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:08:32,755 - INFO - 127.0.0.1 - - [23/Jun/2025 04:08:32] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:08:32,756 - INFO - 127.0.0.1 - - [23/Jun/2025 04:08:32] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:08:33,430 - INFO - 127.0.0.1 - - [23/Jun/2025 04:08:33] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:42,091 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:11:42,122 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:11:42,125 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:11:42,126 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:42,660 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:42,690 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:11:42,714 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:11:42,714 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:11:42,715 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:42,766 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:42] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,029 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:11:43,056 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,058 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,059 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,069 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,208 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:11:43,234 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,237 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,238 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,246 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,963 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:11:43,986 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,988 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,990 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:11:43,999 - INFO - 127.0.0.1 - - [23/Jun/2025 04:11:43] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:16:02,457 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:02] "[32mGET / HTTP/1.1[0m" 302 -
+2025-06-23 04:16:03,853 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:03] "GET /login HTTP/1.1" 200 -
+2025-06-23 04:16:04,238 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:04] "GET /static/style.css HTTP/1.1" 200 -
+2025-06-23 04:16:04,239 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:04] "GET /static/logo.png HTTP/1.1" 200 -
+2025-06-23 04:16:04,490 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:04] "GET /static/main.js HTTP/1.1" 200 -
+2025-06-23 04:16:04,717 - INFO - Request from 127.0.0.1: status=404, time=0.00s, size=0 bytes
+2025-06-23 04:16:04,717 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:04] "[33mGET /static/favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 04:16:23,344 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:23] "POST /login HTTP/1.1" 200 -
+2025-06-23 04:16:23,398 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:23] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:16:23,723 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:23] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:16:23,724 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:23] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-06-23 04:16:54,613 - INFO - 127.0.0.1 - - [23/Jun/2025 04:16:54] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-06-23 04:17:07,863 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:07] "GET /dashboard HTTP/1.1" 200 -
+2025-06-23 04:17:08,244 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:08] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:17:08,244 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:08] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:17:20,680 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-06-23 04:17:20,691 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "GET /dashboard HTTP/1.1" 200 -
+2025-06-23 04:17:20,737 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:17:20,741 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:17:20,781 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "GET /stats HTTP/1.1" 200 -
+2025-06-23 04:17:20,798 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-23 04:17:20,798 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:17:20,808 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:17:20,820 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:20] "GET /security-log HTTP/1.1" 200 -
+2025-06-23 04:17:27,586 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:27] "GET /stats HTTP/1.1" 200 -
+2025-06-23 04:17:28,278 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:28] "GET /security-log HTTP/1.1" 200 -
+2025-06-23 04:17:28,703 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:28] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:17:29,256 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:29] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-23 04:17:31,487 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:31] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:17:43,044 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:43] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-23 04:17:43,222 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:43] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:17:47,421 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:47] "GET /stats HTTP/1.1" 200 -
+2025-06-23 04:17:47,434 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:47] "GET /security-log HTTP/1.1" 200 -
+2025-06-23 04:17:47,452 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:47] "GET /blacklist-page HTTP/1.1" 200 -
+2025-06-23 04:17:47,817 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:47] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-06-23 04:17:47,818 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:47] "[36mGET /static/main.js HTTP/1.1[0m" 304 -
+2025-06-23 04:17:49,512 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:49] "GET /blacklist HTTP/1.1" 200 -
+2025-06-23 04:17:50,916 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:50] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:17:50,916 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:50] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-23 04:17:50,919 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:50] "GET /stats HTTP/1.1" 200 -
+2025-06-23 04:17:50,942 - INFO - 127.0.0.1 - - [23/Jun/2025 04:17:50] "GET /security-log HTTP/1.1" 200 -
+2025-06-23 04:18:02,394 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:02] "POST /login HTTP/1.1" 200 -
+2025-06-23 04:18:08,344 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:08] "POST /login?username=admin&&password=admin HTTP/1.1" 200 -
+2025-06-23 04:18:20,916 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:20] "GET /stats HTTP/1.1" 200 -
+2025-06-23 04:18:20,920 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:20] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:18:20,920 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:20] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-23 04:18:20,943 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:20] "GET /security-log HTTP/1.1" 200 -
+2025-06-23 04:18:26,016 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:26] "POST /login?username=admin&password=admin123 HTTP/1.1" 200 -
+2025-06-23 04:18:42,902 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:42] "POST /login?username=admin HTTP/1.1" 200 -
+2025-06-23 04:18:50,903 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:50] "GET /stats HTTP/1.1" 200 -
+2025-06-23 04:18:50,906 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:50] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:18:50,906 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:50] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-23 04:18:50,941 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:50] "GET /security-log HTTP/1.1" 200 -
+2025-06-23 04:18:51,418 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:51] "POST /login HTTP/1.1" 200 -
+2025-06-23 04:18:59,745 - INFO - 127.0.0.1 - - [23/Jun/2025 04:18:59] "GET /login?username=admin&&password=admin123 HTTP/1.1" 200 -
+2025-06-23 04:19:20,906 - INFO - 127.0.0.1 - - [23/Jun/2025 04:19:20] "GET /stats HTTP/1.1" 200 -
+2025-06-23 04:19:20,911 - INFO - 127.0.0.1 - - [23/Jun/2025 04:19:20] "GET /attack-log HTTP/1.1" 200 -
+2025-06-23 04:19:20,916 - INFO - 127.0.0.1 - - [23/Jun/2025 04:19:20] "GET /attacker-log HTTP/1.1" 200 -
+2025-06-23 04:19:20,937 - INFO - 127.0.0.1 - - [23/Jun/2025 04:19:20] "GET /security-log HTTP/1.1" 200 -
